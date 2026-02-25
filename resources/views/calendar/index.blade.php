@@ -446,8 +446,8 @@
                 return '+' + arg.num + ' ' + moreText;
             }
             , events: function(fetchInfo, successCallback, failureCallback) {
-                fetch('{{ route('
-                        calendar.events ') }}?start=' + fetchInfo.startStr + '&end=' +
+                fetch('{{ route("
+                        calendar.events ") }}?start=' + fetchInfo.startStr + '&end=' +
                         fetchInfo.endStr, {
                             headers: {
                                 'X-Requested-With': 'XMLHttpRequest'
