@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Redirect root to public
+    RewriteCond %{REQUEST_URI} ^/$
+    RewriteRule ^(.*)$ /public/ [L,R=301]
+    
+    # Redirect all requests to public directory (except if already in public)
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ /public/$1 [L,R=301]
+    
+    # If the request is for a file that exists in public, serve it
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
+    RewriteRule ^(.*)$ /public/$1 [L,R=301]
+</IfModule>
+

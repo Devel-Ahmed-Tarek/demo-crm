@@ -1,0 +1,14 @@
+; PHP Configuration for CRM System
+; Copy this file to php.ini or add these settings to your existing php.ini
+
+; File Upload Settings
+upload_max_filesize = 100M
+post_max_size = 100M
+max_file_uploads = 20
+
+; Execution Time Settings
+max_execution_time = 300
+max_input_time = 300
+
+; Memory Settings
+memory_limit = 256M
