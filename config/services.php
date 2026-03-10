@@ -35,4 +35,11 @@ return [
         ],
     ],
 
+    'whatsbridge' => [
+        'base_url' => env('WHATSBRIDGE_BASE_URL', 'https://api.whatsbridge.example'),
+        'api_key' => env('WHATSBRIDGE_API_KEY'),
+        'auth_header' => env('WHATSBRIDGE_AUTH_HEADER', 'Authorization'),
+        'auth_prefix' => env('WHATSBRIDGE_AUTH_PREFIX', 'Bearer '),
+    ],
+
 ];

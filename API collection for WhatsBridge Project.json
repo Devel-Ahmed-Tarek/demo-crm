@@ -1,0 +1,448 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-4a5b-b6c7-d8e9f0a1b2c3",
+		"name": "WhatsBridge Project API",
+		"description": "API collection for WhatsBridge Project - Internal APIs and Dashboard endpoints.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "WhatsApp Internal Service",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/whatsapp/health",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"whatsapp",
+								"health"
+							]
+						},
+						"description": "Check the health of the connected WhatsApp microservice."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Sessions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/whatsapp/sessions",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"whatsapp",
+								"sessions"
+							]
+						},
+						"description": "Retrieve all active WhatsApp sessions."
+					},
+					"response": []
+				},
+				{
+					"name": "Session Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/whatsapp/status?sessionId={{sessionId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"whatsapp",
+								"status"
+							],
+							"query": [
+								{
+									"key": "sessionId",
+									"value": "{{sessionId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get QR Code",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/whatsapp/qr?sessionId={{sessionId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"whatsapp",
+								"qr"
+							],
+							"query": [
+								{
+									"key": "sessionId",
+									"value": "{{sessionId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Chats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/whatsapp/chats?sessionId={{sessionId}}&limit=50&offset=0&refresh=false",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"whatsapp",
+								"chats"
+							],
+							"query": [
+								{
+									"key": "sessionId",
+									"value": "{{sessionId}}"
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "refresh",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Messages",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/whatsapp/messages?sessionId={{sessionId}}&chatId=201234567890@c.us&limit=50&offset=0&order=desc",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"whatsapp",
+								"messages"
+							],
+							"query": [
+								{
+									"key": "sessionId",
+									"value": "{{sessionId}}"
+								},
+								{
+									"key": "chatId",
+									"value": "201234567890@c.us"
+								},
+								{
+									"key": "limit",
+									"value": "50"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								},
+								{
+									"key": "order",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Message",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sessionId\": \"{{sessionId}}\",\n    \"phoneNumber\": \"201234567890\",\n    \"message\": \"Hello from WhatsBridge Project API!\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/whatsapp/send-message",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"whatsapp",
+								"send-message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Session",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/whatsapp/session?sessionId={{sessionId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"whatsapp",
+								"session"
+							],
+							"query": [
+								{
+									"key": "sessionId",
+									"value": "{{sessionId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Groups",
+			"item": [
+				{
+					"name": "Create Group",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sessionId\": \"{{sessionId}}\",\n    \"name\": \"New Project Group\",\n    \"participants\": [\"201234567890\"],\n    \"description\": \"Created via Internal API\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/whatsapp/group/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"whatsapp",
+								"group",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Group Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/whatsapp/group/info?sessionId={{sessionId}}&groupId=120363xxx@g.us",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"whatsapp",
+								"group",
+								"info"
+							],
+							"query": [
+								{
+									"key": "sessionId",
+									"value": "{{sessionId}}"
+								},
+								{
+									"key": "groupId",
+									"value": "120363xxx@g.us"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Send Message to Group",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sessionId\": \"{{sessionId}}\",\n    \"groupId\": \"120363xxx@g.us\",\n    \"message\": \"Hello Group!\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/whatsapp/group/send-message",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"whatsapp",
+								"group",
+								"send-message"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Status (Stories)",
+			"item": [
+				{
+					"name": "Upload Status",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sessionId\": \"{{sessionId}}\",\n    \"type\": \"text\",\n    \"caption\": \"This is my new status from the project!\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/whatsapp/status/upload",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"whatsapp",
+								"status",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Statuses",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/whatsapp/status?sessionId={{sessionId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"whatsapp",
+								"status"
+							],
+							"query": [
+								{
+									"key": "sessionId",
+									"value": "{{sessionId}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Status",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sessionId\": \"{{sessionId}}\",\n    \"messageId\": \"STATUS_MESSAGE_ID\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/whatsapp/status",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"whatsapp",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://whatsapp-code-solutions.test",
+			"type": "string"
+		},
+		{
+			"key": "sessionId",
+			"value": "default",
+			"type": "string"
+		}
+	]
+}

@@ -22,6 +22,7 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SiteManagementController;
 use App\Http\Controllers\ContractController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\WhatsAppServiceController;
 
 // Redirect home to admin login
 Route::get('/', function () {
@@ -145,6 +146,11 @@ Route::middleware(['auth'])->group(function () {
 
     // Reports
     Route::get('/reports', [ReportController::class, 'index'])->name('reports.index');
+
+    // WhatsApp Services
+    Route::get('/whatsapp/services', [WhatsAppServiceController::class, 'index'])->name('whatsapp.services.index');
+    Route::post('/whatsapp/services/send', [WhatsAppServiceController::class, 'send'])->name('whatsapp.services.send');
+    Route::post('/whatsapp/services/send-leads', [WhatsAppServiceController::class, 'sendToLeads'])->name('whatsapp.services.send-leads');
 
     // Calendar
     Route::get('/calendar', [CalendarController::class, 'index'])->name('calendar.index');
