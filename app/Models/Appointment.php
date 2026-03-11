@@ -18,11 +18,13 @@ class Appointment extends Model
         'price',
         'notes',
         'status',
+        'whatsapp_reminder_sent_at',
     ];
 
     protected $casts = [
         'appointment_date' => 'datetime',
         'price' => 'decimal:2',
+        'whatsapp_reminder_sent_at' => 'datetime',
     ];
 
     public function customer(): BelongsTo
