@@ -53,10 +53,17 @@ class AppointmentController extends Controller
             'appointment_date' => 'required|date',
             'price' => 'nullable|numeric|min:0',
             'notes' => 'nullable|string',
+            'whatsapp_reminder_message' => 'nullable|string|max:1000',
         ]);
 
         $validated['user_id'] = auth()->id();
         $validated['status'] = 'scheduled';
+
+        // لو المستخدم مختار الرسالة الافتراضية نمسح أي نص في الحقل، ولو مختار رسالة خاصة نخليها كما هي
+        $useCustom = $request->boolean('use_custom_whatsapp_message', false);
+        if (!$useCustom) {
+            $validated['whatsapp_reminder_message'] = null;
+        }
 
         $appointment = Appointment::create($validated);
         $appointment->load(['customer', 'unit', 'user']);
@@ -82,7 +89,13 @@ class AppointmentController extends Controller
             'price' => 'nullable|numeric|min:0',
             'notes' => 'nullable|string',
             'status' => 'required|in:scheduled,completed,cancelled',
+            'whatsapp_reminder_message' => 'nullable|string|max:1000',
         ]);
+
+        $useCustom = $request->boolean('use_custom_whatsapp_message', false);
+        if (!$useCustom) {
+            $validated['whatsapp_reminder_message'] = null;
+        }
 
         $appointment->update($validated);
         $appointment->load(['customer', 'unit', 'user']);

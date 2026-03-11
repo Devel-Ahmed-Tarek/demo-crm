@@ -20,15 +20,16 @@ class SendAppointmentWhatsAppReminders extends Command
         }
 
         $hours = config('services.whatsbridge.appointment_reminder_hours', 24);
-        $template = config('services.whatsbridge.appointment_reminder_message', 'مرحباً :name، نذكرك بموعدك لدينا في :date الساعة :time.');
+        $defaultTemplate = config('services.whatsbridge.appointment_reminder_message', 'مرحباً :name، نذكرك بموعدك لدينا في :date الساعة :time.');
 
-        $windowStart = now();
-        $windowEnd = now()->addHours($hours);
+        // نافذة التذكير: أي موعد يبعد عن الآن أقل من X ساعة (قبله أو بعده)
+        $windowPast = now()->subHours($hours);
+        $windowFuture = now()->addHours($hours);
 
-        $appointments = Appointment::with('customer')
+        $appointments = Appointment::with(['customer.leads'])
             ->where('status', 'scheduled')
             ->whereNull('whatsapp_reminder_sent_at')
-            ->whereBetween('appointment_date', [$windowStart, $windowEnd])
+            ->whereBetween('appointment_date', [$windowPast, $windowFuture])
             ->get();
 
         $sent = 0;
@@ -36,7 +37,26 @@ class SendAppointmentWhatsAppReminders extends Command
 
         foreach ($appointments as $appointment) {
             $customer = $appointment->customer;
-            if (!$customer || empty(trim($customer->phone ?? ''))) {
+            $phone = null;
+
+            if ($customer) {
+                // أولاً جرّب رقم العميل نفسه
+                if (!empty(trim($customer->phone ?? ''))) {
+                    $phone = $customer->phone;
+                } else {
+                    // لو مفيش رقم على العميل، جرّب أول ليد مرتبط بيه له رقم
+                    $leadWithPhone = $customer->leads
+                        ->filter(fn ($lead) => !empty(trim($lead->phone ?? '')))
+                        ->sortByDesc('created_at')
+                        ->first();
+
+                    if ($leadWithPhone) {
+                        $phone = $leadWithPhone->phone;
+                    }
+                }
+            }
+
+            if (!$customer || !$phone) {
                 $skipped++;
                 continue;
             }
@@ -45,13 +65,18 @@ class SendAppointmentWhatsAppReminders extends Command
             $date = $appointment->appointment_date->locale('ar')->translatedFormat('l j F Y');
             $time = $appointment->appointment_date->format('H:i');
 
+            // لو الميعاد له رسالة خاصة، نستخدمها؛ لو فاضية نستخدم الرسالة الافتراضية
+            $template = !empty(trim($appointment->whatsapp_reminder_message ?? ''))
+                ? $appointment->whatsapp_reminder_message
+                : $defaultTemplate;
+
             $message = str_replace(
                 [':name', ':date', ':time'],
                 [$name, $date, $time],
                 $template
             );
 
-            if ($whatsBridge->sendMessage($customer->phone, $message)) {
+            if ($whatsBridge->sendMessage($phone, $message)) {
                 $appointment->update(['whatsapp_reminder_sent_at' => now()]);
                 $sent++;
             }

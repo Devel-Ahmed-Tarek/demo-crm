@@ -565,16 +565,19 @@
                             <span class="font-medium">{{ __('Contracts') }}</span>
                         </a>
                     </li>
-                    <!-- @unless ($isSalesAgent)
-    <li>
-                                <a href="{{ route('customers.index') }}" class="group flex items-center px-4 py-3 text-sm rounded-xl transition-all duration-200 {{ request()->routeIs('customers.*') ? 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg shadow-green-500/30' : 'text-[#706f6c] dark:text-[#A1A09A] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] hover:text-[#1b1b18] dark:hover:text-[#EDEDEC]' }}">
-                                    <svg class="w-5 h-5 mr-3 transition-transform duration-200 {{ request()->routeIs('customers.*') ? '' : 'group-hover:scale-110' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                    </svg>
-                                    <span class="font-medium">{{ __('Customers') }}</span>
-                                </a>
-                            </li>
-@endunless -->
+                    @unless ($isSalesAgent)
+                        <li>
+                            <a href="{{ route('customers.index') }}"
+                                class="group flex items-center px-4 py-3 text-sm rounded-xl transition-all duration-200 {{ request()->routeIs('customers.*') ? 'bg-gradient-to-r from-green-500 to-green-600 text-white shadow-lg shadow-green-500/30' : 'text-[#706f6c] dark:text-[#A1A09A] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] hover:text-[#1b1b18] dark:hover:text-[#EDEDEC]' }}">
+                                <svg class="w-5 h-5 mr-3 transition-transform duration-200 {{ request()->routeIs('customers.*') ? '' : 'group-hover:scale-110' }}"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                                </svg>
+                                <span class="font-medium">{{ __('Customers') }}</span>
+                            </a>
+                        </li>
+                    @endunless
                     <li>
                         <a href="{{ route('units.index') }}"
                             class="group flex items-center px-4 py-3 text-sm rounded-xl transition-all duration-200 {{ request()->routeIs('units.*') ? 'bg-gradient-to-r from-orange-500 to-orange-600 text-white shadow-lg shadow-orange-500/30' : 'text-[#706f6c] dark:text-[#A1A09A] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] hover:text-[#1b1b18] dark:hover:text-[#EDEDEC]' }}">
@@ -586,14 +589,17 @@
                             <span class="font-medium">{{ __('Units') }}</span>
                         </a>
                     </li>
-                    <!-- <li>
-                        <a href="{{ route('appointments.index') }}" class="group flex items-center px-4 py-3 text-sm rounded-xl transition-all duration-200 {{ request()->routeIs('appointments.*') ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg shadow-pink-500/30' : 'text-[#706f6c] dark:text-[#A1A09A] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] hover:text-[#1b1b18] dark:hover:text-[#EDEDEC]' }}">
-                            <svg class="w-5 h-5 mr-3 transition-transform duration-200 {{ request()->routeIs('appointments.*') ? '' : 'group-hover:scale-110' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    <li>
+                        <a href="{{ route('appointments.index') }}"
+                            class="group flex items-center px-4 py-3 text-sm rounded-xl transition-all duration-200 {{ request()->routeIs('appointments.*') ? 'bg-gradient-to-r from-pink-500 to-pink-600 text-white shadow-lg shadow-pink-500/30' : 'text-[#706f6c] dark:text-[#A1A09A] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] hover:text-[#1b1b18] dark:hover:text-[#EDEDEC]' }}">
+                            <svg class="w-5 h-5 mr-3 transition-transform duration-200 {{ request()->routeIs('appointments.*') ? '' : 'group-hover:scale-110' }}"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                             </svg>
                             <span class="font-medium">{{ __('Appointments') }}</span>
                         </a>
-                    </li> -->
+                    </li>
                     <li>
                         <a href="{{ route('calendar.index') }}"
                             class="group flex items-center px-4 py-3 text-sm rounded-xl transition-all duration-200 {{ request()->routeIs('calendar.*') ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 text-white shadow-lg shadow-yellow-500/30' : 'text-[#706f6c] dark:text-[#A1A09A] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] hover:text-[#1b1b18] dark:hover:text-[#EDEDEC]' }}">
@@ -628,14 +634,17 @@
                                 <span class="font-medium">{{ __('Teams') }}</span>
                             </a>
                         </li>
-                        <!-- <li>
-                                <a href="{{ route('reports.index') }}" class="group flex items-center px-4 py-3 text-sm rounded-xl transition-all duration-200 {{ request()->routeIs('reports.*') ? 'bg-gradient-to-r from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/30' : 'text-[#706f6c] dark:text-[#A1A09A] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] hover:text-[#1b1b18] dark:hover:text-[#EDEDEC]' }}">
-                                    <svg class="w-5 h-5 mr-3 transition-transform duration-200 {{ request()->routeIs('reports.*') ? '' : 'group-hover:scale-110' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                    </svg>
-                                    <span class="font-medium">{{ __('Reports') }}</span>
-                                </a>
-                            </li> -->
+                        <li>
+                            <a href="{{ route('reports.index') }}"
+                                class="group flex items-center px-4 py-3 text-sm rounded-xl transition-all duration-200 {{ request()->routeIs('reports.*') ? 'bg-gradient-to-r from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/30' : 'text-[#706f6c] dark:text-[#A1A09A] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] hover:text-[#1b1b18] dark:hover:text-[#EDEDEC]' }}">
+                                <svg class="w-5 h-5 mr-3 transition-transform duration-200 {{ request()->routeIs('reports.*') ? '' : 'group-hover:scale-110' }}"
+                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                                </svg>
+                                <span class="font-medium">{{ __('Reports') }}</span>
+                            </a>
+                        </li>
                     @endunless
                     @if ($currentUser->isAdmin())
                         <li>
@@ -687,7 +696,7 @@
             </nav>
 
 
-            
+
             <div class="p-4 border-t border-[#e3e3e0] dark:border-[#3E3E3A]">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center">

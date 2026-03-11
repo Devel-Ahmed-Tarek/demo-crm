@@ -75,3 +75,25 @@
 ```bash
 php artisan appointments:send-whatsapp-reminders
 ```
+
+### كيفية تجربة التذكير
+
+1. **إنشاء موعد تجريبي** (خلال ساعة من الآن حتى يقع ضمن نافذة الـ 24 ساعة):
+   ```bash
+   php artisan appointments:create-test-reminder
+   ```
+   - لاستخدام رقم واتساب معيّن (عميل جديد أو موجود):
+     ```bash
+   php artisan appointments:create-test-reminder --phone=201234567890
+   ```
+   - لتأجيل الموعد لـ 2 ساعة من الآن:
+     ```bash
+   php artisan appointments:create-test-reminder --hours=2
+   ```
+
+2. **إرسال التذكيرات يدوياً** (يرسل واتساب للعميل المرتبط بالموعد):
+   ```bash
+   php artisan appointments:send-whatsapp-reminders
+   ```
+
+3. تأكد من وجود `WHATSBRIDGE_BASE_URL` و `WHATSBRIDGE_API_KEY` في `.env` وأن العميل له رقم هاتف صالح.

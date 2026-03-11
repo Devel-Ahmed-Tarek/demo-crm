@@ -17,7 +17,8 @@ Schedule::command('units:check-expired-reservations')
     ->at('02:00')
     ->timezone('Africa/Cairo');
 
-// تذكير المواعيد عبر واتساب (مثلاً قبل 24 ساعة) — يشغّل كل ساعة
+// تذكير المواعيد عبر واتساب
+// في التطوير نخليه كل دقيقة عشان يسهل التست، وفي الإنتاج يفضل يكون hourly
 Schedule::command('appointments:send-whatsapp-reminders')
-    ->hourly()
+    ->everyMinute()
     ->timezone('Africa/Cairo');

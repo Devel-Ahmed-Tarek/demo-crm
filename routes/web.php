@@ -76,7 +76,13 @@ Route::middleware(['auth'])->group(function () {
 
     // Leads
     Route::post('/leads/bulk-delete', [LeadController::class, 'bulkDestroy'])->name('leads.bulk-delete');
-    Route::post('/leads/{lead}/update-stage', [LeadController::class, 'updateStage'])->name('leads.update-stage');
+
+    // Update stage: السماح بكل من GET و POST لتفادي 405 من أي طلبات غير متوقعة
+    Route::match(['GET', 'POST'], '/leads/{lead}/update-stage', [LeadController::class, 'updateStage'])
+        ->name('leads.update-stage');
+
+    // Activities: POST لإضافة activity، GET يعيد التوجيه لتفاصيل الليد
+    Route::get('/leads/{lead}/activities', fn ($lead) => redirect()->route('leads.show', $lead))->name('leads.activities.index');
     Route::post('/leads/{lead}/activities', [LeadController::class, 'storeActivity'])->name('leads.activities.store');
     Route::post('/leads/{lead}/comments', [LeadController::class, 'storeComment'])->name('leads.comments.store');
     Route::post('/leads/{lead}/events', [LeadController::class, 'storeEvent'])->name('leads.events.store');

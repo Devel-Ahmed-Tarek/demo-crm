@@ -62,6 +62,36 @@
             @enderror
         </div>
 
+        <div class="space-y-2">
+            <label class="block text-sm font-medium text-[#1b1b18] dark:text-[#EDEDEC]">
+                {{ __('رسالة تذكير الواتساب') }}
+            </label>
+            <div class="flex flex-col sm:flex-row gap-3 text-xs sm:text-sm">
+                @php
+                    $hasCustomMessage = filled(old('whatsapp_reminder_message', $appointment->whatsapp_reminder_message));
+                @endphp
+                <label class="inline-flex items-center gap-2">
+                    <input type="radio" name="use_custom_whatsapp_message" value="0"
+                        onchange="toggleWhatsappMessageField(false)"
+                        {{ $hasCustomMessage ? '' : 'checked' }}>
+                    <span>{{ __('استخدم الرسالة الافتراضية') }}</span>
+                </label>
+                <label class="inline-flex.items-center gap-2">
+                    <input type="radio" name="use_custom_whatsapp_message" value="1"
+                        onchange="toggleWhatsappMessageField(true)"
+                        {{ $hasCustomMessage ? 'checked' : '' }}>
+                    <span>{{ __('استخدم رسالة خاصة لهذا الموعد') }}</span>
+                </label>
+            </div>
+            <textarea name="whatsapp_reminder_message" id="whatsapp_reminder_message" rows="3"
+                placeholder="{{ __('اكتب رسالة خاصة أو اتركها فارغة لاستخدام الافتراضية. المتغيرات: :name :date :time') }}"
+                class="w-full px-4 py-2 border border-[#e3e3e0] dark:border-[#3E3E3A] rounded-lg bg-white dark:bg-[#0a0a0a] text-[#1b1b18] dark:text-[#EDEDEC] disabled:bg-gray-100 disabled:text-[#A1A09A]"
+                {{ $hasCustomMessage ? '' : 'disabled' }}>{{ old('whatsapp_reminder_message', $appointment->whatsapp_reminder_message) }}</textarea>
+            @error('whatsapp_reminder_message')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+            @enderror
+        </div>
+
         <div class="flex items-center justify-end gap-4">
             <a href="{{ route('appointments.index') }}" class="px-4 py-2 border border-[#e3e3e0] dark:border-[#3E3E3A] rounded-lg text-[#1b1b18] dark:text-[#EDEDEC] hover:bg-gray-50 dark:hover:bg-[#3E3E3A]">
                 {{ __('Cancel') }}

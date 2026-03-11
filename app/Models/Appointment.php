@@ -19,6 +19,7 @@ class Appointment extends Model
         'notes',
         'status',
         'whatsapp_reminder_sent_at',
+        'whatsapp_reminder_message',
     ];
 
     protected $casts = [

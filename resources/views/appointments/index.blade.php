@@ -153,8 +153,8 @@ $isAdmin = $currentUser?->isAdmin();
 </div>
 
 <!-- Create/Edit Modal -->
-<div id="appointmentModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    <div class="bg-white dark:bg-[#161615] rounded-lg shadow-lg p-6 w-full max-w-md">
+<div id="appointmentModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div class="bg-white dark:bg-[#161615] rounded-xl shadow-lg p-4 sm:p-6 w-full max-w-lg max-h-[80vh] overflow-y-auto">
         <div class="flex items-center justify-between mb-4">
             <h2 id="modalTitle" class="text-xl font-semibold text-[#1b1b18] dark:text-[#EDEDEC]">{{ __('Add Appointment') }}</h2>
             <button onclick="closeModal()" class="text-[#706f6c] dark:text-[#A1A09A] hover:text-[#1b1b18] dark:hover:text-[#EDEDEC]">
@@ -211,6 +211,28 @@ $isAdmin = $currentUser?->isAdmin();
             <div>
                 <label class="block text-sm font-medium text-[#1b1b18] dark:text-[#EDEDEC] mb-2">{{ __('Notes') }}</label>
                 <textarea name="notes" id="notes" rows="3" class="w-full px-4 py-2 border border-[#e3e3e0] dark:border-[#3E3E3A] rounded-lg bg-white dark:bg-[#0a0a0a] text-[#1b1b18] dark:text-[#EDEDEC]"></textarea>
+            </div>
+
+            <div class="space-y-2">
+                <label class="block text-sm font-medium text-[#1b1b18] dark:text-[#EDEDEC]">
+                    {{ __('رسالة تذكير الواتساب') }}
+                </label>
+                <div class="flex flex-col sm:flex-row gap-3 text-xs sm:text-sm">
+                    <label class="inline-flex items-center gap-2">
+                        <input type="radio" name="use_custom_whatsapp_message" value="0" checked
+                            onchange="toggleWhatsappMessageField(false)">
+                        <span>{{ __('استخدم الرسالة الافتراضية') }}</span>
+                    </label>
+                    <label class="inline-flex items-center gap-2">
+                        <input type="radio" name="use_custom_whatsapp_message" value="1"
+                            onchange="toggleWhatsappMessageField(true)">
+                        <span>{{ __('استخدم رسالة خاصة لهذا الموعد') }}</span>
+                    </label>
+                </div>
+                <textarea name="whatsapp_reminder_message" id="whatsapp_reminder_message" rows="3"
+                    placeholder="{{ __('اكتب رسالة خاصة أو اتركها فارغة لاستخدام الافتراضية. المتغيرات: :name :date :time') }}"
+                    class="w-full px-4 py-2 border border-[#e3e3e0] dark:border-[#3E3E3A] rounded-lg bg-white dark:bg-[#0a0a0a] text-[#1b1b18] dark:text-[#EDEDEC] disabled:bg-gray-100 disabled:text-[#A1A09A]"
+                    disabled></textarea>
             </div>
 
             <div class="flex items-center justify-end gap-4 pt-4">
@@ -321,10 +343,9 @@ $isAdmin = $currentUser?->isAdmin();
 
 <script>
     function openCreateModal() {
-        document.getElementById('modalTitle').textContent = '{{ __('
-        Add Appointment ') }}';
+        document.getElementById('modalTitle').textContent = '{{ __('Add Appointment') }}';
 
-        route = '{{ route("appointments.store") }}';
+        const route = '{{ route("appointments.store") }}';
         document.getElementById('appointmentForm').action = route;
         document.getElementById('form_method').value = 'POST';
         document.getElementById('appointmentForm').reset();
@@ -338,6 +359,19 @@ $isAdmin = $currentUser?->isAdmin();
 
     function closeModal() {
         document.getElementById('appointmentModal').classList.add('hidden');
+    }
+
+    function toggleWhatsappMessageField(useCustom) {
+        const field = document.getElementById('whatsapp_reminder_message');
+        if (!field) return;
+
+        if (useCustom) {
+            field.disabled = false;
+            field.focus();
+        } else {
+            field.value = '';
+            field.disabled = true;
+        }
     }
 
     // Close modal on outside click
