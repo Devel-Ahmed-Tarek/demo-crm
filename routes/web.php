@@ -1,28 +1,28 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LeadController;
-use App\Http\Controllers\LeadStageController;
-use App\Http\Controllers\LeadSourceController;
-use App\Http\Controllers\LeadTagController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\CustomerCommunicationController;
-use App\Http\Controllers\AppointmentController;
-use App\Http\Controllers\UnitController;
 use App\Http\Controllers\ApartmentController;
-use App\Http\Controllers\TeamController;
-use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CalendarController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ContractController;
+use App\Http\Controllers\CustomerCommunicationController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LeadController;
+use App\Http\Controllers\LeadSourceController;
+use App\Http\Controllers\LeadStageController;
+use App\Http\Controllers\LeadTagController;
+use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SiteManagementController;
-use App\Http\Controllers\ContractController;
-use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\UnitController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\WhatsAppServiceController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 // Redirect home to admin login
 Route::get('/', function () {
@@ -42,6 +42,7 @@ Route::get('/home', function () {
     if (Auth::check()) {
         return redirect()->route('dashboard');
     }
+
     return redirect()->route('home');
 });
 
@@ -53,6 +54,7 @@ Route::get('/language/{locale}', function ($locale) {
         // Save to session immediately
         session()->save();
     }
+
     return redirect()->back();
 })->name('language.switch');
 
@@ -155,7 +157,11 @@ Route::middleware(['auth'])->group(function () {
 
     // WhatsApp Services
     Route::get('/whatsapp/services', [WhatsAppServiceController::class, 'index'])->name('whatsapp.services.index');
+    Route::get('/whatsapp/services/chats', [WhatsAppServiceController::class, 'apiChats'])->name('whatsapp.services.api.chats');
+    Route::get('/whatsapp/services/messages', [WhatsAppServiceController::class, 'apiMessages'])->name('whatsapp.services.api.messages');
+    Route::get('/whatsapp/services/media', [WhatsAppServiceController::class, 'proxyMessageMedia'])->name('whatsapp.services.media');
     Route::post('/whatsapp/services/send', [WhatsAppServiceController::class, 'send'])->name('whatsapp.services.send');
+    Route::post('/whatsapp/services/send-chat', [WhatsAppServiceController::class, 'sendChatReply'])->name('whatsapp.services.send-chat');
     Route::post('/whatsapp/services/send-leads', [WhatsAppServiceController::class, 'sendToLeads'])->name('whatsapp.services.send-leads');
 
     // Calendar
@@ -169,7 +175,6 @@ Route::middleware(['auth'])->group(function () {
 
     // Clear Cache (Admin only)
     Route::get('/clear-cache', function () {
-
 
         \Illuminate\Support\Facades\Artisan::call('cache:clear');
         \Illuminate\Support\Facades\Artisan::call('config:clear');
@@ -244,4 +249,4 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/api/notifications/mark-all-read', [NotificationController::class, 'markAllAsRead'])->name('notifications.mark-all-read');
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

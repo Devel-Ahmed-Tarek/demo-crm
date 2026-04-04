@@ -871,5 +871,7 @@
     "Visit our Twitter page": "Visit our Twitter page",
     "Visit our Instagram page": "Visit our Instagram page",
     "Visit our LinkedIn page": "Visit our LinkedIn page",
-    "Cache cleared successfully.": "Cache cleared successfully."
+    "Cache cleared successfully.": "Cache cleared successfully.",
+    "رسالة صوتية": "Voice message",
+    "رسالة صوتية — لا يوجد رابط تشغيل في بيانات الـ API.": "Voice message — no playback URL in API data."
 }

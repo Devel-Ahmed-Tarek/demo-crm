@@ -151,9 +151,9 @@
                 </svg>
                 <span class="text-xs font-medium">{{ __('Calendar') }}</span>
             </a>
-            <a href="{{ route('whatsapp.services.index') }}"
-                class="flex flex-col items-center justify-center px-3 py-2 rounded-lg transition-all duration-200 {{ request()->routeIs('whatsapp.services.*') ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400' : 'text-[#706f6c] dark:text-[#A1A09A] hover:bg-gray-50 dark:hover:bg-[#3E3E3A]' }}"
-                title="{{ __('WhatsApp Services') }}">
+            <a href="{{ route('customer.messages') }}"
+                class="flex flex-col items-center justify-center px-3 py-2 rounded-lg transition-all duration-200 {{ request()->routeIs('customer.messages*') ? 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400' : 'text-[#706f6c] dark:text-[#A1A09A] hover:bg-gray-50 dark:hover:bg-[#3E3E3A]' }}"
+                title="{{ __('شات واتساب (customer)') }}">
                 <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M8 10h.01M12 10h.01M16 10h.01M9 16h6m2 4H7a2 2 0 01-2-2V6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v10a2 2 0 01-2 2z" />
@@ -612,14 +612,25 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('whatsapp.services.index') }}"
-                            class="group flex items-center px-4 py-3 text-sm rounded-xl transition-all duration-200 {{ request()->routeIs('whatsapp.services.*') ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/30' : 'text-[#706f6c] dark:text-[#A1A09A] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] hover:text-[#1b1b18] dark:hover:text-[#EDEDEC]' }}">
-                            <svg class="w-5 h-5 mr-3 transition-transform duration-200 {{ request()->routeIs('whatsapp.services.*') ? '' : 'group-hover:scale-110' }}"
+                        <a href="{{ route('customer.messages') }}"
+                            class="group flex items-center px-4 py-3 text-sm rounded-xl transition-all duration-200 {{ request()->routeIs('customer.messages*') ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 text-white shadow-lg shadow-emerald-500/30' : 'text-[#706f6c] dark:text-[#A1A09A] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] hover:text-[#1b1b18] dark:hover:text-[#EDEDEC]' }}">
+                            <svg class="w-5 h-5 mr-3 transition-transform duration-200 {{ request()->routeIs('customer.messages*') ? '' : 'group-hover:scale-110' }}"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M8 10h.01M12 10h.01M16 10h.01M9 16h6m2 4H7a2 2 0 01-2-2V6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v10a2 2 0 01-2 2z" />
                             </svg>
-                            <span class="font-medium">{{ __('WhatsApp Services') }}</span>
+                            <span class="font-medium">{{ __('شات واتساب') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('whatsapp.services.index') }}"
+                            class="group flex items-center px-4 py-3 text-sm rounded-xl transition-all duration-200 {{ request()->routeIs('whatsapp.services.*') ? 'bg-gradient-to-r from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/30' : 'text-[#706f6c] dark:text-[#A1A09A] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] hover:text-[#1b1b18] dark:hover:text-[#EDEDEC]' }}">
+                            <svg class="w-5 h-5 mr-3 transition-transform duration-200 {{ request()->routeIs('whatsapp.services.*') ? '' : 'group-hover:scale-110' }}"
+                                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <span class="font-medium">{{ __('إرسال واتساب') }}</span>
                         </a>
                     </li>
                     @unless ($isSalesAgent)

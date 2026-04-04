@@ -874,5 +874,7 @@
     "Visit our Twitter page": "زيارة صفحتنا على تويتر",
     "Visit our Instagram page": "زيارة صفحتنا على إنستغرام",
     "Visit our LinkedIn page": "زيارة صفحتنا على لينكد إن",
-    "Cache cleared successfully.": "تم مسح الكاش بنجاح."
+    "Cache cleared successfully.": "تم مسح الكاش بنجاح.",
+    "رسالة صوتية": "رسالة صوتية",
+    "رسالة صوتية — لا يوجد رابط تشغيل في بيانات الـ API.": "رسالة صوتية — لا يوجد رابط تشغيل في بيانات الـ API."
 }

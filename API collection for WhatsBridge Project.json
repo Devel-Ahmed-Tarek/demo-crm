@@ -206,6 +206,35 @@
 					"response": []
 				},
 				{
+					"name": "Send Message (by chatId / JID e.g. @lid)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sessionId\": \"{{sessionId}}\",\n    \"chatId\": \"23051089494095@lid\",\n    \"message\": \"Hello — LID / JID full id\",\n    \"api_key\": \"YOUR_API_KEY\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/whatsapp/send-message",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"whatsapp",
+								"send-message"
+							]
+						},
+						"description": "For chats where id is not digits@c.us (e.g. WhatsApp @lid). Same route; use chatId or jid + sessionId. CRM tries chatId then jid."
+					},
+					"response": []
+				},
+				{
 					"name": "Delete Session",
 					"request": {
 						"method": "DELETE",
