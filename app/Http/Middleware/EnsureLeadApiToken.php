@@ -14,7 +14,7 @@ class EnsureLeadApiToken
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $expected = config('services.lead_api.token');
+        $expected = config('lead_api.token');
         if (! is_string($expected) || $expected === '') {
             return response()->json([
                 'success' => false,

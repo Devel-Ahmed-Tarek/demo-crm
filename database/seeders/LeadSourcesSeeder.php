@@ -45,6 +45,14 @@ class LeadSourcesSeeder extends Seeder
                 'description_ar' => 'أي مصدر مخصص أو متنوع.',
                 'sort_order' => 4,
             ],
+            [
+                'key' => 'whatsapp',
+                'label_en' => 'WhatsApp',
+                'label_ar' => 'واتساب',
+                'description_en' => 'Leads from WhatsApp chats and integrations.',
+                'description_ar' => 'ليد من واتساب والتكاملات.',
+                'sort_order' => 5,
+            ],
         ];
 
         foreach ($sources as $index => $source) {
@@ -55,4 +63,3 @@ class LeadSourcesSeeder extends Seeder
         }
     }
 }
-
