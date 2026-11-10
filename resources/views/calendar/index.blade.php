@@ -50,7 +50,6 @@
 </div>
 
 @push('styles')
-<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.css" rel="stylesheet">
 <style>
     .calendar-container {
         min-height: 400px;
@@ -397,15 +396,11 @@
 @endpush
 
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
 @if (app()->getLocale() === 'ar')
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/locales/ar.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.15/locales/ar.global.min.js"></script>
 @endif
 <script>
-    // Ensure FullCalendar is loaded before using it
-    if (typeof FullCalendar === 'undefined') {
-        console.error('FullCalendar not loaded');
-    }
     document.addEventListener('DOMContentLoaded', function() {
         const calendarEl = document.getElementById('calendar');
         if (!calendarEl) {
@@ -418,59 +413,63 @@
             return;
         }
 
-        // Detect mobile
         const isMobile = window.innerWidth < 640;
         const isTablet = window.innerWidth >= 640 && window.innerWidth < 1024;
-        const moreText = 'more';
+        const moreText = @json(__('more'));
+        const appLocale = @json(app()->getLocale());
+        const appDirection = @json(app()->getLocale() === 'ar' ? 'rtl' : 'ltr');
+        const eventsUrl = @json(route('calendar.events'));
+        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content || '';
 
         const calendar = new FullCalendar.Calendar(calendarEl, {
-            initialView: 'timeGridDay'
-            , initialDate: new Date()
-            , headerToolbar: {
-                left: isMobile ? 'prev,next' : 'prev,next today'
-                , center: 'title'
-                , right: isMobile ? '' : 'dayGridMonth,timeGridWeek,timeGridDay'
-            }
-            , locale: '{{ app()->getLocale() }}'
-            , direction: '{{ app()->getLocale() === '
-            ar ' ? '
-            rtl ' : '
-            ltr ' }}'
-            , height: 'auto'
-            , aspectRatio: isMobile ? 1.1 : (isTablet ? 1.5 : 1.8)
-            , firstDay: 1
-            , weekNumbers: false
-            , dayMaxEvents: isMobile ? 2 : 3
-            , moreLinkClick: 'popover'
-            , moreLinkContent: function(arg) {
+            initialView: isMobile ? 'timeGridDay' : 'dayGridMonth',
+            initialDate: new Date(),
+            headerToolbar: {
+                left: isMobile ? 'prev,next' : 'prev,next today',
+                center: 'title',
+                right: isMobile ? 'timeGridDay,dayGridMonth' : 'dayGridMonth,timeGridWeek,timeGridDay'
+            },
+            locale: appLocale,
+            direction: appDirection,
+            height: 'auto',
+            aspectRatio: isMobile ? 1.1 : (isTablet ? 1.5 : 1.8),
+            firstDay: 1,
+            weekNumbers: false,
+            dayMaxEvents: isMobile ? 2 : 3,
+            moreLinkClick: 'popover',
+            moreLinkContent: function(arg) {
                 return '+' + arg.num + ' ' + moreText;
-            }
-            , events: function(fetchInfo, successCallback, failureCallback) {
-                fetch('{{ route("calendar.events") }}?start=' + fetchInfo.startStr + '&end=' +
-                        fetchInfo.endStr, {
-                            headers: {
-                                'X-Requested-With': 'XMLHttpRequest'
-                                , 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                                    .content
-                            }
-                        })
-                    .then(response => response.json())
-                    .then(data => {
+            },
+            events: function(fetchInfo, successCallback, failureCallback) {
+                fetch(eventsUrl + '?start=' + encodeURIComponent(fetchInfo.startStr) + '&end=' + encodeURIComponent(fetchInfo.endStr), {
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': csrfToken,
+                            'Accept': 'application/json'
+                        }
+                    })
+                    .then(function(response) {
+                        if (!response.ok) {
+                            throw new Error('Failed to load calendar events');
+                        }
+                        return response.json();
+                    })
+                    .then(function(data) {
                         successCallback(data);
                     })
-                    .catch(error => {
+                    .catch(function(error) {
                         console.error('Error fetching events:', error);
                         failureCallback(error);
                     });
-            }
-            , eventClick: function(info) {
+            },
+            eventClick: function(info) {
                 showEventDetails(info.event);
-            }
-            , eventContent: function(arg) {
+            },
+            eventContent: function(arg) {
                 const props = arg.event.extendedProps;
                 const type = props.type || 'appointment';
                 const time = arg.timeText || '';
-                const isMobile = window.innerWidth < 640;
+                const mobileView = window.innerWidth < 640;
 
                 let icon = '';
 
@@ -482,8 +481,7 @@
                     icon = '💬';
                 }
 
-                // On mobile, show only icon and truncated title
-                if (isMobile) {
+                if (mobileView) {
                     return {
                         html: `
                             <div class="fc-event-main-frame flex items-center gap-1">
@@ -511,11 +509,10 @@
                         </div>
                     `
                 };
-            }
-            , eventDisplay: 'block'
-            , height: 'auto'
-            , contentHeight: 'auto'
-        , });
+            },
+            eventDisplay: 'block',
+            contentHeight: 'auto'
+        });
 
         calendar.render();
         window.calendar = calendar;

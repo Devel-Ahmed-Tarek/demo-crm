@@ -5,7 +5,7 @@
 <section id="home" class="hero-bg min-h-screen flex items-center justify-center text-white pt-16" @if($heroImage) style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{ \App\Helpers\UploadHelper::url($heroImage) }}'); background-size: cover; background-position: center; background-attachment: fixed;" @endif>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center hero-content">
         <h1 class="text-4xl md:text-6xl font-bold mb-6">{{ __('Where Your Real Estate Dreams Become Reality') }}</h1>
-        <p class="text-xl md:text-2xl mb-8 text-gray-200">{{ __('WE SOLD helps you buy, sell & invest with confidence, ease, and proven results') }}</p>
+        <p class="text-xl md:text-2xl mb-8 text-gray-200">{{ __('جدران helps you buy, sell & invest with confidence, ease, and proven results') }}</p>
         <div class="text-2xl md:text-3xl font-bold mb-8">
             <span>500+ {{ __('Homes Sold') }}</span>
             <span class="mx-4">|</span>
@@ -49,7 +49,7 @@
 <!-- About Section -->
 <section id="about" class="py-20 bg-white dark:bg-[#0a0a0a] section-animate">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">{{ __('About WE SOLD') }}</h2>
+        <h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">{{ __('About جدران') }}</h2>
 
         <div class="grid md:grid-cols-2 gap-12 items-stretch">
             <!-- Video Section -->
@@ -64,14 +64,14 @@
                 </video>
                 @elseif(isset($siteSettings['about_image']) && $siteSettings['about_image']->value)
                 <img src="{{ \App\Helpers\UploadHelper::url($siteSettings['about_image']->value) }}"
-                    alt="{{ __('WE SOLD team meeting and collaboration') }}"
+                    alt="{{ __('جدران team meeting and collaboration') }}"
                     class="w-full h-full object-cover"
                     loading="lazy"
                     width="800"
                     height="600">
                 @else
                 <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800"
-                    alt="{{ __('WE SOLD team meeting and collaboration') }}"
+                    alt="{{ __('جدران team meeting and collaboration') }}"
                     class="w-full h-full object-cover"
                     loading="lazy"
                     width="800"
@@ -82,7 +82,7 @@
             <!-- Content Section -->
             <div class="flex flex-col justify-center animate-from-right">
                 <p class="text-lg text-gray-700 dark:text-gray-300 mb-8">
-                    {{ __('At WE SOLD, we build lasting relationships through trust, expertise, and unwavering commitment to your real estate success. With over a decade of experience in the market, we\'ve helped countless families and investors achieve their property dreams with personalized service and proven results.') }}
+                    {{ __('At جدران, we build lasting relationships through trust, expertise, and unwavering commitment to your real estate success. With over a decade of experience in the market, we\'ve helped countless families and investors achieve their property dreams with personalized service and proven results.') }}
                 </p>
                 <div class="grid grid-cols-2 gap-6 mb-8">
                     <div class="bg-white dark:bg-[#161615] rounded-lg p-6 shadow-md text-center">

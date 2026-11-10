@@ -10,7 +10,7 @@
             @elseif(app()->getLocale() === 'en' && isset($siteSettings['about_hero_title_en']) && $siteSettings['about_hero_title_en']->value)
             {{ $siteSettings['about_hero_title_en']->value }}
             @else
-            {{ __('About WE SOLD') }}
+            {{ __('About جدران') }}
             @endif
         </h1>
         <p class="text-xl text-center text-orange-100">
@@ -40,12 +40,12 @@
                 </video>
                 @elseif(isset($siteSettings['about_image']) && $siteSettings['about_image']->value)
                 <img src="{{ \App\Helpers\UploadHelper::url($siteSettings['about_image']->value) }}"
-                    alt="{{ __('WE SOLD team meeting and collaboration') }}"
+                    alt="{{ __('جدران team meeting and collaboration') }}"
                     class="w-full h-full object-cover"
                     loading="lazy">
                 @else
                 <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800"
-                    alt="{{ __('WE SOLD team meeting and collaboration') }}"
+                    alt="{{ __('جدران team meeting and collaboration') }}"
                     class="w-full h-full object-cover"
                     loading="lazy"
                     width="800"
@@ -68,7 +68,7 @@
                     @elseif(app()->getLocale() === 'en' && isset($siteSettings['about_story_text_en']) && $siteSettings['about_story_text_en']->value)
                     {{ $siteSettings['about_story_text_en']->value }}
                     @else
-                    {{ __('At WE SOLD, we build lasting relationships through trust, expertise, and unwavering commitment to your real estate success. With over a decade of experience in the market, we\'ve helped countless families and investors achieve their property dreams with personalized service and proven results.') }}
+                    {{ __('At جدران, we build lasting relationships through trust, expertise, and unwavering commitment to your real estate success. With over a decade of experience in the market, we\'ve helped countless families and investors achieve their property dreams with personalized service and proven results.') }}
                     @endif
                 </p>
                 <p class="text-lg text-gray-700 dark:text-gray-300 mb-8">

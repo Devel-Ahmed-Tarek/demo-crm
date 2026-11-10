@@ -11,7 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::statement("ALTER TABLE `leads` MODIFY `source` VARCHAR(191) NOT NULL DEFAULT 'website'");
+        if (DB::getDriverName() === 'mysql') {
+            DB::statement("ALTER TABLE `leads` MODIFY `source` VARCHAR(191) NOT NULL DEFAULT 'website'");
+        }
 
         LeadSource::query()->updateOrCreate(
             ['key' => 'whatsapp'],
@@ -28,6 +30,10 @@ return new class extends Migration
 
     public function down(): void
     {
+        if (DB::getDriverName() !== 'mysql') {
+            return;
+        }
+
         DB::statement("ALTER TABLE `leads` MODIFY `source` ENUM('facebook', 'website', 'referral', 'other') NOT NULL DEFAULT 'website'");
     }
 };

@@ -24,10 +24,8 @@ use App\Http\Controllers\WhatsAppServiceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-// Redirect home to admin login
-Route::get('/', function () {
-    return redirect()->route('login');
-});
+// Public company website (homepage)
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/listings', [HomeController::class, 'listings'])->name('listings');
 Route::get('/sites/{site}/projects', [HomeController::class, 'siteProjects'])->name('site.projects');
 Route::get('/sites/{site}/projects/{project}', [HomeController::class, 'projectDetails'])->name('project.details');
@@ -37,7 +35,7 @@ Route::get('/service/{service}', [HomeController::class, 'serviceDetails'])->nam
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::post('/contact', [HomeController::class, 'contactSubmit'])->name('contact.submit');
 
-// Redirect authenticated users from home to dashboard
+// Legacy /home: staff go to dashboard, visitors go to public site
 Route::get('/home', function () {
     if (Auth::check()) {
         return redirect()->route('dashboard');

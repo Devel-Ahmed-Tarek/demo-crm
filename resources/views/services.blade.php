@@ -42,7 +42,7 @@
 <!-- Why Choose Us Section -->
 <section class="py-20 bg-white dark:bg-[#0a0a0a]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">{{ __('Why Choose WE SOLD?') }}</h2>
+        <h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">{{ __('Why Choose جدران?') }}</h2>
         <div class="grid md:grid-cols-3 gap-8">
             <div class="text-center">
                 <div class="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center text-white text-2xl mx-auto mb-4">✓</div>

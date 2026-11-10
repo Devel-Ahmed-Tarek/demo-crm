@@ -41,7 +41,7 @@ class HomeController extends Controller
         // Get site settings
         $siteSettings = SiteSetting::all()->keyBy('key');
         $heroImage = $siteSettings['hero_image']->value ?? null;
-        $siteName = $siteSettings['site_name']->value ?? 'WE SOLD';
+        $siteName = $siteSettings['site_name']->value ?? 'جدران';
         $siteLogo = $siteSettings['site_logo']->value ?? null;
         $siteFavicon = $siteSettings['site_favicon']->value ?? null;
 

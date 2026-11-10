@@ -20,7 +20,7 @@ return new class extends Migration
         // Insert default settings
         DB::table('site_settings')->insert([
             ['key' => 'hero_image', 'value' => null, 'type' => 'image'],
-            ['key' => 'site_name', 'value' => 'WE SOLD', 'type' => 'text'],
+            ['key' => 'site_name', 'value' => 'جدران', 'type' => 'text'],
             ['key' => 'site_logo', 'value' => null, 'type' => 'image'],
             ['key' => 'site_favicon', 'value' => null, 'type' => 'image'],
             ['key' => 'site_address', 'value' => null, 'type' => 'text'],

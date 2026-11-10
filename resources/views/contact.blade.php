@@ -111,7 +111,7 @@
                             <div class="text-orange-500 text-2xl mr-4">✉️</div>
                             <div>
                                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">{{ __('Email') }}</h3>
-                                <p class="text-gray-600 dark:text-gray-400">info@wesold.com</p>
+                                <p class="text-gray-600 dark:text-gray-400">info@jdran-real-estate.com</p>
                             </div>
                         </div>
                     </div>
