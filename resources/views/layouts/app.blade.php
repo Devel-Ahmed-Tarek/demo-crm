@@ -40,33 +40,8 @@
     <!-- Mobile Header -->
     <header
         class="lg:hidden fixed top-0 left-0 right-0 z-50 overflow-visible bg-white dark:bg-[#161615] border-b border-[#e3e3e0] dark:border-[#3E3E3A] shadow-sm">
-        <div class="flex items-center justify-between px-4 py-3 overflow-visible">
-
-            <div class="flex items-center gap-2 overflow-visible">
-
-                <!-- Language Switcher -->
-                <div class="relative z-[80] overflow-visible" id="mobile-language-switcher">
-                    <button type="button" onclick="toggleLanguageMenu()"
-                        class="p-2 text-[#1b1b18] dark:text-[#EDEDEC] hover:bg-gray-100 dark:hover:bg-[#3E3E3A] rounded-lg transition-colors"
-                        title="{{ __('Select Language') }}" aria-haspopup="true" aria-expanded="false"
-                        id="mobile-language-button">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                        </svg>
-                    </button>
-                    <div id="languageMenu"
-                        class="hidden absolute top-full mt-2 min-w-[11rem] w-max bg-white dark:bg-[#161615] border border-[#e3e3e0] dark:border-[#3E3E3A] rounded-lg shadow-xl z-[90] {{ $isRTL ? 'right-0 left-auto' : 'left-0 right-auto' }}">
-                        <a href="{{ route('language.switch', 'ar') }}"
-                            class="block px-4 py-2.5 text-sm whitespace-nowrap text-[#1b1b18] dark:text-[#EDEDEC] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] {{ $currentLocale === 'ar' ? 'bg-blue-50 dark:bg-blue-900/30' : '' }}">
-                            {{ __('Arabic') }}
-                        </a>
-                        <a href="{{ route('language.switch', 'en') }}"
-                            class="block px-4 py-2.5 text-sm whitespace-nowrap text-[#1b1b18] dark:text-[#EDEDEC] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] {{ $currentLocale === 'en' ? 'bg-blue-50 dark:bg-blue-900/30' : '' }}">
-                            {{ __('English') }}
-                        </a>
-                    </div>
-                </div>
+        <div class="grid grid-cols-3 items-center gap-2 px-4 py-3 overflow-visible">
+            <div class="flex items-center gap-2 justify-self-start">
                 <button type="button" class="theme-toggle" data-theme-toggle>
                     <span class="sr-only">{{ __('Toggle theme') }}</span>
                     <svg class="theme-icon theme-icon-sun" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,16 +57,42 @@
                     class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold text-sm">
                     {{ strtoupper(substr($currentUser->name, 0, 1)) }}
                 </div>
+            </div>
+
+            <!-- Language Switcher (centered) -->
+            <div class="relative z-[80] overflow-visible justify-self-center" id="mobile-language-switcher">
+                <button type="button" onclick="toggleLanguageMenu()"
+                    class="p-2 text-[#1b1b18] dark:text-[#EDEDEC] hover:bg-gray-100 dark:hover:bg-[#3E3E3A] rounded-lg transition-colors"
+                    title="{{ __('Select Language') }}" aria-haspopup="true" aria-expanded="false"
+                    id="mobile-language-button">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                    </svg>
+                </button>
+                <div id="languageMenu"
+                    class="hidden absolute top-full left-1/2 -translate-x-1/2 mt-2 min-w-[11rem] w-max bg-white dark:bg-[#161615] border border-[#e3e3e0] dark:border-[#3E3E3A] rounded-lg shadow-xl z-[90]">
+                    <a href="{{ route('language.switch', 'ar') }}"
+                        class="block px-4 py-2.5 text-sm whitespace-nowrap text-[#1b1b18] dark:text-[#EDEDEC] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] {{ $currentLocale === 'ar' ? 'bg-blue-50 dark:bg-blue-900/30' : '' }}">
+                        {{ __('Arabic') }}
+                    </a>
+                    <a href="{{ route('language.switch', 'en') }}"
+                        class="block px-4 py-2.5 text-sm whitespace-nowrap text-[#1b1b18] dark:text-[#EDEDEC] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] {{ $currentLocale === 'en' ? 'bg-blue-50 dark:bg-blue-900/30' : '' }}">
+                        {{ __('English') }}
+                    </a>
+                </div>
+            </div>
+
+            <div class="justify-self-end">
                 <form method="POST" action="{{ route('logout') }}" class="inline-flex">
                     @csrf
                     <button type="submit"
-                        class="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 rounded-lg transition-colors"
-                        title="{{ __('Logout') }}">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        class="inline-flex items-center justify-center p-2 text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 rounded-lg transition-colors"
+                        title="{{ __('Logout') }}" aria-label="{{ __('Logout') }}">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                         </svg>
-                        <span>{{ __('Logout') }}</span>
                     </button>
                 </form>
             </div>

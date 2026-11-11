@@ -1288,8 +1288,7 @@ aside[class*='lg:block']>nav::-webkit-scrollbar-thumb:hover {
     left: auto;
 }
 
-[dir="rtl"] #languageMenuDesktop,
-[dir="rtl"] #languageMenu {
+[dir="rtl"] #languageMenuDesktop {
     right: auto;
     left: 0;
 }
@@ -1299,10 +1298,16 @@ aside[class*='lg:block']>nav::-webkit-scrollbar-thumb:hover {
     right: auto;
 }
 
-[dir="ltr"] #languageMenuDesktop,
-[dir="ltr"] #languageMenu {
+[dir="ltr"] #languageMenuDesktop {
     left: auto;
     right: 0;
+}
+
+/* Mobile language menu: keep centered under the globe in both LTR and RTL */
+#languageMenu {
+    left: 50% !important;
+    right: auto !important;
+    transform: translateX(-50%);
 }
 
 /* Ensure dropdowns are not clipped */
