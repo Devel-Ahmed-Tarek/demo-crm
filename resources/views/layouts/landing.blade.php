@@ -354,7 +354,7 @@
 
 <body class="bg-white dark:bg-[#0a0a0a] no-js">
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-[#143057]/95 backdrop-blur-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
@@ -402,7 +402,7 @@
             </div>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-black/95 backdrop-blur-sm">
+        <div id="mobileMenu" class="hidden md:hidden bg-[#143057]/98 backdrop-blur-sm">
             <div class="px-4 pt-2 pb-4 space-y-2">
                 <a href="{{ route('home') }}" class="block text-white hover:text-orange-400 py-2">{{ __('Home') }}</a>
                 <a href="{{ route('about') }}" class="block text-white hover:text-orange-400 py-2">{{ __('About') }}</a>
@@ -443,7 +443,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 dark:bg-black text-white py-12">
+    <footer class="bg-[#143057] text-white py-12">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div>

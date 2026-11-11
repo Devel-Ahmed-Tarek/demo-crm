@@ -22,7 +22,7 @@
 
         <div class="bg-white dark:bg-[#161615] rounded-xl shadow-lg overflow-hidden">
             <!-- Service Header -->
-            <div class="p-8 md:p-12 bg-gradient-to-r from-orange-500 to-red-500 text-white">
+            <div class="p-8 md:p-12 bg-gradient-to-r from-orange-500 to-orange-200 text-white">
                 <div class="flex items-center gap-6 mb-6">
                     @if($service->icon_type === 'image' && $service->icon_image_url)
                         <div class="w-20 h-20 bg-white/20 rounded-lg flex items-center justify-center backdrop-blur-sm">
@@ -51,7 +51,7 @@
                     <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">{{ __('Interested in This Service?') }}</h3>
                     <p class="text-gray-600 dark:text-gray-400 mb-6">{{ __('Contact us today to learn more about how we can help you with your real estate needs.') }}</p>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="{{ route('contact') }}" class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 text-center">
+                        <a href="{{ route('contact') }}" class="bg-gradient-to-r from-orange-500 to-orange-200 hover:from-orange-600 hover:to-orange-400 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 text-center">
                             {{ __('Get Started Today') }}
                         </a>
                         @if($service->link)

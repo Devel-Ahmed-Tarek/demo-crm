@@ -8,40 +8,64 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* جدران brand palette (from color godran.pdf) */
+    --color-brand-navy: #143057;
+    --color-brand-gold: #BC8F43;
+    --color-brand-gold-light: #FED786;
+    --color-brand-gray: #BEC2C5;
+
+    /* Remap orange utilities to brand gold so existing classes pick up branding */
+    --color-orange-50: #FFF8E8;
+    --color-orange-100: #FEEFC8;
+    --color-orange-200: #FED786;
+    --color-orange-300: #F0C96A;
+    --color-orange-400: #E0B55A;
+    --color-orange-500: #BC8F43;
+    --color-orange-600: #A07838;
+    --color-orange-700: #84622E;
+    --color-orange-800: #684C24;
+    --color-orange-900: #4A3619;
+    --color-orange-950: #2E210F;
 }
 
 :root {
     color-scheme: light;
-    --app-bg: #f4f6fb;
-    --app-bg-muted: #eef0f9;
+    --brand-navy: #143057;
+    --brand-gold: #BC8F43;
+    --brand-gold-light: #FED786;
+    --brand-gray: #BEC2C5;
+    --brand-gradient: linear-gradient(90deg, #BC8F43 0%, #FED786 50%, #BC8F43 100%);
+    --app-bg: #f7f5f0;
+    --app-bg-muted: #f1eee7;
     --app-surface: #ffffff;
-    --app-surface-soft: #f8f9ff;
-    --app-surface-strong: #edf0fb;
-    --app-border: rgba(15, 23, 42, 0.08);
-    --app-border-strong: rgba(15, 23, 42, 0.18);
-    --app-text: #1c1f2a;
-    --app-text-muted: #6b7280;
-    --app-text-subtle: #8c92a3;
-    --app-card-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
-    --app-radial: radial-gradient(circle at top, rgba(99, 102, 241, 0.08), transparent 45%),
-        radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.12), transparent 35%);
+    --app-surface-soft: #faf8f3;
+    --app-surface-strong: #f0ebe1;
+    --app-border: rgba(20, 48, 87, 0.10);
+    --app-border-strong: rgba(20, 48, 87, 0.22);
+    --app-text: #143057;
+    --app-text-muted: #5c6573;
+    --app-text-subtle: #8a9199;
+    --app-card-shadow: 0 20px 60px rgba(20, 48, 87, 0.08);
+    --app-radial: radial-gradient(circle at top, rgba(188, 143, 67, 0.12), transparent 45%),
+        radial-gradient(circle at 20% 20%, rgba(20, 48, 87, 0.08), transparent 35%);
 }
 
 :root[data-theme='dark'] {
     color-scheme: dark;
-    --app-bg: #05070f;
-    --app-bg-muted: #0b0f1b;
-    --app-surface: #0f1321;
-    --app-surface-soft: #14192a;
-    --app-surface-strong: #1b2135;
-    --app-border: rgba(148, 163, 184, 0.15);
-    --app-border-strong: rgba(248, 250, 252, 0.25);
-    --app-text: #f4f6ff;
-    --app-text-muted: #c5cbe0;
-    --app-text-subtle: #9ea6c1;
-    --app-card-shadow: 0 25px 65px rgba(2, 6, 23, 0.55);
-    --app-radial: radial-gradient(circle at top, rgba(14, 165, 233, 0.35), transparent 45%),
-        radial-gradient(circle at 80% 0%, rgba(147, 51, 234, 0.3), transparent 40%);
+    --app-bg: #0a1526;
+    --app-bg-muted: #0f1c33;
+    --app-surface: #143057;
+    --app-surface-soft: #1a3a66;
+    --app-surface-strong: #1f4575;
+    --app-border: rgba(190, 194, 197, 0.18);
+    --app-border-strong: rgba(254, 215, 134, 0.28);
+    --app-text: #f7f5f0;
+    --app-text-muted: #BEC2C5;
+    --app-text-subtle: #9aa1a6;
+    --app-card-shadow: 0 25px 65px rgba(5, 12, 24, 0.55);
+    --app-radial: radial-gradient(circle at top, rgba(188, 143, 67, 0.28), transparent 45%),
+        radial-gradient(circle at 80% 0%, rgba(254, 215, 134, 0.18), transparent 40%);
 }
 
 body {

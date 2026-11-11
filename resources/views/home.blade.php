@@ -12,7 +12,7 @@
             <span>98% {{ __('Client Satisfaction') }}</span>
         </div>
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <a href="{{ route('contact') }}" class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105">
+            <a href="{{ route('contact') }}" class="bg-gradient-to-r from-orange-500 to-orange-200 hover:from-orange-600 hover:to-orange-400 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105">
                 {{ __('Get Free Property Evaluation') }}
             </a>
             <a href="{{ route('listings') }}" class="bg-white text-orange-700 border-2 border-orange-700 hover:bg-orange-50 px-8 py-4 rounded-lg text-lg font-semibold transition-all">
@@ -37,7 +37,7 @@
                             <option value="previous" {{ request('project_type') === 'previous' ? 'selected' : '' }}>{{ __('Previous Projects') }}</option>
                         </select>
                     </div>
-                    <button type="submit" class="bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 whitespace-nowrap">
+                    <button type="submit" class="bg-gradient-to-r from-orange-500 to-orange-200 hover:from-orange-600 hover:to-orange-400 text-white px-8 py-3 rounded-lg font-semibold transition-all transform hover:scale-105 whitespace-nowrap">
                         {{ __('Search') }}
                     </button>
                 </div>
@@ -106,7 +106,7 @@
                         <div class="text-gray-600 dark:text-gray-400">{{ __('Winning Service') }}</div>
                     </div>
                 </div>
-                <a href="{{ route('contact') }}" class="inline-block bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-3 rounded-lg font-semibold transition-all">
+                <a href="{{ route('contact') }}" class="inline-block bg-gradient-to-r from-orange-500 to-orange-200 hover:from-orange-600 hover:to-orange-400 text-white px-8 py-3 rounded-lg font-semibold transition-all">
                     {{ __('Meet Our Team') }}
                 </a>
             </div>
@@ -392,7 +392,7 @@
                             class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none resize-none bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-white">{{ old('message') }}</textarea>
                     </div>
                     <div class="flex flex-col sm:flex-row gap-4">
-                        <button type="submit" class="flex-1 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-4 rounded-lg font-semibold transition-all transform hover:scale-105">
+                        <button type="submit" class="flex-1 bg-gradient-to-r from-orange-500 to-orange-200 hover:from-orange-600 hover:to-orange-400 text-white px-8 py-4 rounded-lg font-semibold transition-all transform hover:scale-105">
                             {{ __('Get Your Free Consultation') }}
                         </button>
                         @if(isset($siteSettings['site_phone']) && $siteSettings['site_phone']->value)

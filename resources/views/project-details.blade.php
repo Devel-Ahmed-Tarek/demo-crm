@@ -69,7 +69,7 @@
                     <a href="{{ route('site.projects', $site) }}" class="px-6 py-3 border-2 border-orange-500 text-orange-500 hover:bg-orange-50 dark:hover:bg-orange-900/20 rounded-lg font-semibold transition-all">
                         {{ __('Back to Projects') }}
                     </a>
-                    <a href="{{ route('contact') }}" class="flex-1 bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-6 py-3 rounded-lg text-center font-semibold transition-all transform hover:scale-105">
+                    <a href="{{ route('contact') }}" class="flex-1 bg-gradient-to-r from-orange-500 to-orange-200 hover:from-orange-600 hover:to-orange-400 text-white px-6 py-3 rounded-lg text-center font-semibold transition-all transform hover:scale-105">
                         {{ __('Contact Us') }}
                     </a>
                 </div>

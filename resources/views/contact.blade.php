@@ -75,7 +75,7 @@
                             <textarea name="message" id="message" rows="5"
                                 class="w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none resize-none bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-white">{{ old('message') }}</textarea>
                         </div>
-                        <button type="submit" class="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white px-8 py-4 rounded-lg font-semibold transition-all transform hover:scale-105">
+                        <button type="submit" class="w-full bg-gradient-to-r from-orange-500 to-orange-200 hover:from-orange-600 hover:to-orange-400 text-white px-8 py-4 rounded-lg font-semibold transition-all transform hover:scale-105">
                             {{ __('Send Message') }}
                         </button>
                     </form>
