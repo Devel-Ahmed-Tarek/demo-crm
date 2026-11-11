@@ -823,5 +823,6 @@
     "Cache cleared successfully.": "Cache cleared successfully.",
     "رسالة صوتية": "Voice message",
     "رسالة صوتية — لا يوجد رابط تشغيل في بيانات الـ API.": "Voice message — no playback URL in API data.",
-    "جدران team meeting and collaboration": "جدران team meeting and collaboration"
+    "جدران team meeting and collaboration": "جدران team meeting and collaboration",
+    "Logout": "Logout"
 }

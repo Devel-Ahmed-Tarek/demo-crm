@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="max-w-6xl mx-auto">
-        <div class="mb-4 space-y-1">
-            <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
+    <div class="w-full max-w-none">
+        <div class="mb-3 sm:mb-4 space-y-1">
+            <h1 class="text-xl sm:text-2xl font-bold text-gray-900 dark:text-gray-100">
                 {{ __('إدارة واتساب') }}
             </h1>
-            <p class="text-sm text-gray-600 dark:text-gray-400">
+            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
                 {{ __('إرسال رسائل، أو لعدة ليدز، أو متابعة محادثاتك المرتبطة بحساب WhatsBridge.') }}
             </p>
         </div>
@@ -19,17 +19,17 @@
         </div>
 
         {{-- Tabs header --}}
-        <div class="inline-flex flex-wrap gap-1 rounded-xl bg-gray-100 dark:bg-[#222220] p-1 text-xs sm:text-sm mb-5">
+        <div class="flex w-full gap-1 rounded-xl bg-gray-100 dark:bg-[#222220] p-1 text-xs sm:text-sm mb-3 sm:mb-4 overflow-x-auto">
             <button type="button" id="whatsapp-tab-single"
-                class="px-3 sm:px-4 py-1.5 rounded-lg font-medium text-gray-900 dark:text-gray-100 bg-white dark:bg-[#161615] shadow-sm">
+                class="flex-1 min-w-[7.5rem] px-3 sm:px-4 py-2 rounded-lg font-medium text-gray-900 dark:text-gray-100 bg-white dark:bg-[#161615] shadow-sm whitespace-nowrap">
                 {{ __('رسالة لرقم واحد') }}
             </button>
             <button type="button" id="whatsapp-tab-leads"
-                class="px-3 sm:px-4 py-1.5 rounded-lg font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
+                class="flex-1 min-w-[7.5rem] px-3 sm:px-4 py-2 rounded-lg font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 whitespace-nowrap">
                 {{ __('رسالة لعدة ليدز') }}
             </button>
             <button type="button" id="whatsapp-tab-chats"
-                class="px-3 sm:px-4 py-1.5 rounded-lg font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100">
+                class="flex-1 min-w-[7.5rem] px-3 sm:px-4 py-2 rounded-lg font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 whitespace-nowrap">
                 {{ __('محادثات الواتساب') }}
             </button>
         </div>
@@ -61,8 +61,8 @@
 
         {{-- Tab: single number --}}
         <div id="whatsapp-tab-single-panel"
-            class="bg-white dark:bg-[#161615] border border-gray-200 dark:border-[#3E3E3A] rounded-xl shadow-sm p-6 space-y-6 mb-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600 dark:text-gray-400 mb-4">
+            class="bg-white dark:bg-[#161615] border border-gray-200 dark:border-[#3E3E3A] rounded-xl shadow-sm p-4 sm:p-6 space-y-5 sm:space-y-6 mb-4 sm:mb-6 w-full">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-2 sm:mb-4">
                 <div>
                     <span class="font-semibold text-gray-800 dark:text-gray-100">{{ __('حالة الإعداد') }}:</span>
                     @if ($baseUrl && config('services.whatsbridge.api_key'))
@@ -143,7 +143,7 @@
 
         {{-- Tab: leads bulk --}}
         <div id="whatsapp-tab-leads-panel"
-            class="bg-white dark:bg-[#161615] border border-gray-200 dark:border-[#3E3E3A] rounded-xl shadow-sm p-6 space-y-5 hidden">
+            class="bg-white dark:bg-[#161615] border border-gray-200 dark:border-[#3E3E3A] rounded-xl shadow-sm p-4 sm:p-6 space-y-4 sm:space-y-5 hidden w-full">
             <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div class="space-y-1">
                     <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
@@ -202,9 +202,9 @@
             <form method="POST" action="{{ route('whatsapp.services.send-leads') }}" class="space-y-4">
                 @csrf
 
-                <div class="border border-gray-200 dark:border-[#3E3E3A] rounded-lg overflow-hidden">
-                    <div class="max-h-64 overflow-y-auto">
-                        <table class="min-w-full text-xs sm:text-sm">
+                <div class="border border-gray-200 dark:border-[#3E3E3A] rounded-lg overflow-hidden w-full">
+                    <div class="max-h-[min(50vh,28rem)] sm:max-h-[min(55vh,32rem)] overflow-y-auto overflow-x-auto">
+                        <table class="min-w-full w-full text-xs sm:text-sm">
                             <thead class="bg-gray-50 dark:bg-[#222220] text-gray-600 dark:text-gray-300">
                                 <tr>
                                     <th class="w-10 px-3 py-2 text-start">
@@ -305,21 +305,22 @@
 
         {{-- Tab: WhatsApp chats (WhatsBridge) --}}
         <div id="whatsapp-tab-chats-panel"
-            class="bg-white dark:bg-[#161615] border border-gray-200 dark:border-[#3E3E3A] rounded-xl shadow-sm overflow-hidden mb-6 hidden">
-            <div class="p-4 sm:p-5 border-b border-gray-200 dark:border-[#3E3E3A] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                <div>
-                    <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-100">
+            class="bg-white dark:bg-[#161615] border border-gray-200 dark:border-[#3E3E3A] rounded-xl shadow-sm overflow-hidden mb-4 sm:mb-6 hidden w-full flex flex-col"
+            style="height: calc(100dvh - 13.5rem); min-height: 28rem;">
+            <div class="shrink-0 p-3 sm:p-4 border-b border-gray-200 dark:border-[#3E3E3A] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3">
+                <div class="min-w-0">
+                    <h2 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-100">
                         {{ __('محادثات الواتساب') }}
                     </h2>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    <p class="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 mt-0.5 line-clamp-2">
                         {{ __('لا يوجد تحديث تلقائي للشات — استخدم «تحديث القائمة» أو «تحديث الرسائل» عند الحاجة. بعد إرسالك لرد يُحدَّث المحادثة مرة واحدة تلقائياً.') }}
                     </p>
                     <p id="whatsapp-live-status" class="text-[10px] text-emerald-600 dark:text-emerald-400 mt-1 hidden"
                         aria-live="polite"></p>
                 </div>
-                <div class="flex flex-wrap gap-2">
+                <div class="flex flex-wrap gap-2 shrink-0">
                     <button type="button" id="whatsapp-chats-refresh"
-                        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-white bg-emerald-600 hover:bg-emerald-700">
+                        class="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-medium text-white bg-emerald-600 hover:bg-emerald-700">
                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -329,24 +330,24 @@
                 </div>
             </div>
 
-            <div class="flex flex-col lg:flex-row min-h-[min(70vh,560px)] max-h-[min(85vh,720px)]">
+            <div class="flex flex-col lg:flex-row flex-1 min-h-0">
                 <aside
-                    class="w-full lg:w-[min(100%,320px)] lg:flex-shrink-0 border-b lg:border-b-0 lg:border-e border-gray-200 dark:border-[#3E3E3A] flex flex-col max-h-[40vh] lg:max-h-none">
-                    <div id="whatsapp-chats-list" class="flex-1 overflow-y-auto p-2 space-y-1 text-sm">
+                    class="w-full lg:w-80 xl:w-96 lg:flex-shrink-0 border-b lg:border-b-0 lg:border-e border-gray-200 dark:border-[#3E3E3A] flex flex-col min-h-0 h-[34%] max-h-[40%] lg:h-auto lg:max-h-none">
+                    <div id="whatsapp-chats-list" class="flex-1 overflow-y-auto overflow-x-hidden p-2 space-y-1 text-sm min-h-0">
                         <p class="text-xs text-gray-500 dark:text-gray-400 p-3">
                             {{ __('اضغط «تحديث القائمة» لتحميل المحادثات.') }}
                         </p>
                     </div>
                 </aside>
-                <section class="flex-1 flex flex-col min-h-0 bg-gray-50/50 dark:bg-[#0f0f0e]">
+                <section class="flex-1 flex flex-col min-h-0 min-w-0 bg-gray-50/50 dark:bg-[#0f0f0e]">
                     <div id="whatsapp-chat-header"
-                        class="px-4 py-3 border-b border-gray-200 dark:border-[#3E3E3A] flex flex-wrap items-center justify-between gap-2">
+                        class="shrink-0 px-3 sm:px-4 py-2.5 sm:py-3 border-b border-gray-200 dark:border-[#3E3E3A] flex flex-wrap items-center justify-between gap-2">
                         <span id="whatsapp-chat-header-title"
                             class="text-sm font-medium text-gray-800 dark:text-gray-100 flex-1 min-w-0 truncate">
                             {{ __('اختر محادثة من القائمة') }}
                         </span>
                         <button type="button" id="whatsapp-messages-refresh" disabled
-                            class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-emerald-100 dark:hover:bg-emerald-900/50">
+                            class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium text-emerald-700 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 disabled:opacity-40 disabled:cursor-not-allowed hover:bg-emerald-100 dark:hover:bg-emerald-900/50">
                             <svg class="w-3.5 h-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
@@ -354,30 +355,30 @@
                             {{ __('تحديث الرسائل') }}
                         </button>
                     </div>
-                    <div id="whatsapp-messages-wrap" class="flex-1 overflow-y-auto p-3 space-y-2 min-h-[200px]">
+                    <div id="whatsapp-messages-wrap" class="flex-1 overflow-y-auto overflow-x-hidden p-3 space-y-2 min-h-0">
                         <p class="text-xs text-gray-500 dark:text-gray-400 text-center py-8">
                             {{ __('لم تُحدد محادثة بعد.') }}
                         </p>
                     </div>
                     <form id="whatsapp-reply-form" method="POST" action="{{ route('whatsapp.services.send-chat') }}"
-                        class="border-t border-gray-200 dark:border-[#3E3E3A] p-3 space-y-2 bg-white dark:bg-[#161615]">
+                        class="shrink-0 border-t border-gray-200 dark:border-[#3E3E3A] p-3 space-y-2 bg-white dark:bg-[#161615]">
                         @csrf
                         <input type="hidden" name="tab" value="chats">
                         <input type="hidden" name="chat_id" id="whatsapp-reply-chat-id" value="">
                         <label for="whatsapp-reply-message" class="sr-only">{{ __('رسالة') }}</label>
-                        <textarea name="message" id="whatsapp-reply-message" rows="2" disabled
-                            class="block w-full rounded-xl border border-gray-300 dark:border-[#3E3E3A] dark:bg-[#161615] dark:text-gray-100 text-sm px-3 py-2 focus:ring-2 focus:ring-emerald-500 disabled:opacity-50"
-                            placeholder="{{ __('اكتب ردك هنا…') }}">{{ old('message') }}</textarea>
-                        <div class="flex justify-end">
+                        <div class="flex flex-col sm:flex-row gap-2 sm:items-end">
+                            <textarea name="message" id="whatsapp-reply-message" rows="2" disabled
+                                class="block w-full flex-1 rounded-xl border border-gray-300 dark:border-[#3E3E3A] dark:bg-[#161615] dark:text-gray-100 text-sm px-3 py-2 focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 resize-y max-h-40"
+                                placeholder="{{ __('اكتب ردك هنا…') }}">{{ old('message') }}</textarea>
                             <button type="submit" id="whatsapp-reply-submit" disabled
-                                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                                class="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed shrink-0 w-full sm:w-auto">
                                 {{ __('إرسال') }}
                             </button>
                         </div>
                     </form>
                 </section>
             </div>
-            <p class="text-[11px] text-gray-500 dark:text-gray-500 px-4 pb-4">
+            <p class="shrink-0 text-[10px] sm:text-[11px] text-gray-500 dark:text-gray-500 px-3 sm:px-4 py-2 border-t border-gray-100 dark:border-[#2a2a28]">
                 {{ __('لاستقبال رسائل الواردة لحظياً دون ضغط «تحديث» يلزم ربط Webhook من WhatsBridge بسيرفر الـ CRM (أو WebSocket). الاستطلاع التلقائي المتكرر أُلغي لتخفيف الحمل على الخادم.') }}
             </p>
         </div>
@@ -413,9 +414,9 @@
             const csrf = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
 
             const activeClasses =
-                'px-3 sm:px-4 py-1.5 rounded-lg font-medium text-gray-900 dark:text-gray-100 bg-white dark:bg-[#161615] shadow-sm';
+                'flex-1 min-w-[7.5rem] px-3 sm:px-4 py-2 rounded-lg font-medium text-gray-900 dark:text-gray-100 bg-white dark:bg-[#161615] shadow-sm whitespace-nowrap';
             const inactiveClasses =
-                'px-3 sm:px-4 py-1.5 rounded-lg font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100';
+                'flex-1 min-w-[7.5rem] px-3 sm:px-4 py-2 rounded-lg font-medium text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 whitespace-nowrap';
 
             let selectedChatId = null;
             let selectedChatLabel = '';

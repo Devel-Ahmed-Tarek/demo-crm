@@ -39,29 +39,30 @@
 <body class="app-shell">
     <!-- Mobile Header -->
     <header
-        class="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white dark:bg-[#161615] border-b border-[#e3e3e0] dark:border-[#3E3E3A] shadow-sm">
-        <div class="flex items-center justify-between px-4 py-3">
+        class="lg:hidden fixed top-0 left-0 right-0 z-50 overflow-visible bg-white dark:bg-[#161615] border-b border-[#e3e3e0] dark:border-[#3E3E3A] shadow-sm">
+        <div class="flex items-center justify-between px-4 py-3 overflow-visible">
 
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 overflow-visible">
 
                 <!-- Language Switcher -->
-                <div class="relative">
-                    <button onclick="toggleLanguageMenu()"
+                <div class="relative z-[80] overflow-visible" id="mobile-language-switcher">
+                    <button type="button" onclick="toggleLanguageMenu()"
                         class="p-2 text-[#1b1b18] dark:text-[#EDEDEC] hover:bg-gray-100 dark:hover:bg-[#3E3E3A] rounded-lg transition-colors"
-                        title="{{ __('Select Language') }}">
+                        title="{{ __('Select Language') }}" aria-haspopup="true" aria-expanded="false"
+                        id="mobile-language-button">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
                         </svg>
                     </button>
                     <div id="languageMenu"
-                        class="hidden absolute {{ $isRTL ? 'left-0' : 'right-0' }} mt-2 w-32 bg-white dark:bg-[#161615] border border-[#e3e3e0] dark:border-[#3E3E3A] rounded-lg shadow-lg z-50">
+                        class="hidden absolute top-full mt-2 min-w-[11rem] w-max bg-white dark:bg-[#161615] border border-[#e3e3e0] dark:border-[#3E3E3A] rounded-lg shadow-xl z-[90] {{ $isRTL ? 'right-0 left-auto' : 'left-0 right-auto' }}">
                         <a href="{{ route('language.switch', 'ar') }}"
-                            class="block px-4 py-2 text-sm text-[#1b1b18] dark:text-[#EDEDEC] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] {{ $currentLocale === 'ar' ? 'bg-blue-50 dark:bg-blue-900/30' : '' }}">
+                            class="block px-4 py-2.5 text-sm whitespace-nowrap text-[#1b1b18] dark:text-[#EDEDEC] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] {{ $currentLocale === 'ar' ? 'bg-blue-50 dark:bg-blue-900/30' : '' }}">
                             {{ __('Arabic') }}
                         </a>
                         <a href="{{ route('language.switch', 'en') }}"
-                            class="block px-4 py-2 text-sm text-[#1b1b18] dark:text-[#EDEDEC] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] {{ $currentLocale === 'en' ? 'bg-blue-50 dark:bg-blue-900/30' : '' }}">
+                            class="block px-4 py-2.5 text-sm whitespace-nowrap text-[#1b1b18] dark:text-[#EDEDEC] hover:bg-gray-50 dark:hover:bg-[#3E3E3A] {{ $currentLocale === 'en' ? 'bg-blue-50 dark:bg-blue-900/30' : '' }}">
                             {{ __('English') }}
                         </a>
                     </div>
@@ -81,6 +82,18 @@
                     class="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold text-sm">
                     {{ strtoupper(substr($currentUser->name, 0, 1)) }}
                 </div>
+                <form method="POST" action="{{ route('logout') }}" class="inline-flex">
+                    @csrf
+                    <button type="submit"
+                        class="inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 rounded-lg transition-colors"
+                        title="{{ __('Logout') }}">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        <span>{{ __('Logout') }}</span>
+                    </button>
+                </form>
             </div>
         </div>
         <!-- Mobile Navigation Icons -->
@@ -381,62 +394,35 @@
                 @endif
             </ul>
         </nav>
-        <div class="p-4 border-t border-[#e3e3e0] dark:border-[#3E3E3A]">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <div
-                        class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold shadow-lg shadow-blue-500/30 ring-2 ring-blue-500/20">
-                        {{ strtoupper(substr($currentUser->name, 0, 1)) }}
-                    </div>
-                    <div class="ml-3">
-                        <p class="text-sm font-medium text-[#1b1b18] dark:text-[#EDEDEC]">{{ $currentUser->name }}
-                        </p>
-                        <p class="text-xs text-[#706f6c] dark:text-[#A1A09A]">
-                            {{ __(ucfirst(str_replace('_', ' ', $currentUser->role))) }}</p>
-                    </div>
-                </div>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit"
-                        class="p-2 text-[#706f6c] dark:text-[#A1A09A] hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all duration-200 group">
-                        <svg class="w-5 h-5 transition-transform duration-200 group-hover:scale-110" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                        </svg>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </aside>
-
-    <!-- Mobile Sidebar Menu Footer -->
-    <div id="mobileSidebarFooter"
-        class="lg:hidden fixed bottom-0 left-0 w-64 bg-white dark:bg-[#161615] border-t border-[#e3e3e0] dark:border-[#3E3E3A] p-4 transform translate-y-full transition-transform duration-300 z-50">
-        <div class="flex items-center justify-between">
+        <div class="p-4 border-t border-[#e3e3e0] dark:border-[#3E3E3A] space-y-3">
             <div class="flex items-center">
                 <div
-                    class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold shadow-lg shadow-blue-500/30">
-                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                    class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white font-semibold shadow-lg shadow-blue-500/30 ring-2 ring-blue-500/20">
+                    {{ strtoupper(substr($currentUser->name, 0, 1)) }}
                 </div>
-                <div class="ml-3">
-                    <p class="text-sm font-medium text-[#1b1b18] dark:text-[#EDEDEC]">{{ auth()->user()->name }}</p>
+                <div class="ml-3 min-w-0">
+                    <p class="text-sm font-medium text-[#1b1b18] dark:text-[#EDEDEC] truncate">{{ $currentUser->name }}
+                    </p>
                     <p class="text-xs text-[#706f6c] dark:text-[#A1A09A]">
-                        {{ __(ucfirst(str_replace('_', ' ', auth()->user()->role))) }}</p>
+                        {{ __(ucfirst(str_replace('_', ' ', $currentUser->role))) }}</p>
                 </div>
             </div>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button type="submit"
-                    class="p-2 text-[#706f6c] dark:text-[#A1A09A] hover:text-red-500 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-all duration-200">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 text-sm font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 dark:hover:bg-red-900/40 rounded-lg transition-all duration-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                     </svg>
+                    <span>{{ __('Logout') }}</span>
                 </button>
             </form>
         </div>
-    </div>
+    </aside>
+
+    <!-- Kept for toggleMobileMenu JS compatibility -->
+    <div id="mobileSidebarFooter" class="hidden" aria-hidden="true"></div>
 
     <div class="flex h-screen overflow-hidden">
         <!-- Desktop Sidebar -->
@@ -792,14 +778,11 @@
 
         function toggleLanguageMenu() {
             const mobileMenu = document.getElementById('languageMenu');
-            const desktopMenu = document.getElementById('languageMenuDesktop');
-
-            if (mobileMenu) {
-                mobileMenu.classList.toggle('hidden');
-            }
-            if (desktopMenu) {
-                desktopMenu.classList.toggle('hidden');
-            }
+            const btn = document.getElementById('mobile-language-button');
+            if (!mobileMenu) return;
+            const willOpen = mobileMenu.classList.contains('hidden');
+            mobileMenu.classList.toggle('hidden');
+            if (btn) btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
         }
 
         function toggleLanguageMenuDesktop() {
@@ -813,11 +796,18 @@
         document.addEventListener('click', function(event) {
             const mobileMenu = document.getElementById('languageMenu');
             const desktopMenu = document.getElementById('languageMenuDesktop');
-            const isClickInside = event.target.closest('.relative');
+            const mobileSwitcher = document.getElementById('mobile-language-switcher');
+            const desktopSwitcher = event.target.closest('#languageMenuDesktop') ||
+                event.target.closest('[onclick="toggleLanguageMenuDesktop()"]');
 
-            if (!isClickInside) {
-                if (mobileMenu) mobileMenu.classList.add('hidden');
-                if (desktopMenu) desktopMenu.classList.add('hidden');
+            if (mobileMenu && mobileSwitcher && !mobileSwitcher.contains(event.target)) {
+                mobileMenu.classList.add('hidden');
+                const btn = document.getElementById('mobile-language-button');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+            }
+            if (desktopMenu && !desktopSwitcher && !event.target.closest('#languageMenuDesktop') &&
+                !event.target.closest('[onclick="toggleLanguageMenuDesktop()"]')) {
+                desktopMenu.classList.add('hidden');
             }
         });
 
