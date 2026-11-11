@@ -358,10 +358,13 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <div class="flex items-center gap-3">
-                    @if($siteLogo)
-                    <img src="{{ \App\Helpers\UploadHelper::url($siteLogo) }}" alt="{{ $siteName }}" class="h-10 w-auto" width="40" height="40" loading="eager" fetchpriority="high">
-                    @endif
-                    <a href="{{ route('home') }}" class="text-white text-2xl font-bold">{{ $siteName }}</a>
+                    <a href="{{ route('home') }}" class="flex items-center gap-3 text-white text-2xl font-bold">
+                        @if($siteLogo)
+                        <img src="{{ \App\Helpers\UploadHelper::url($siteLogo) }}" alt="{{ $siteName }}" class="h-10 w-auto" width="40" height="40" loading="eager" fetchpriority="high">
+                        @else
+                        <span>{{ $siteName }}</span>
+                        @endif
+                    </a>
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="{{ route('home') }}" class="text-white hover:text-orange-400 transition-colors">{{ __('Home') }}</a>
